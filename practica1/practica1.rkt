@@ -80,11 +80,10 @@
 ;; id que fue pasado como parámetro.
 ;; lookup: (listof list) -> any
 (define (lookup id lst)
-   ;(cond
-     ;['() empty]
-     ;[(equal? id (car lst)) (cdr lst)]
-     ;[else (lookup id (cdr lst))]))
-   (error 'lookup "Función no implementada"))
+   (cond
+     [(equal? (car (car lst)) id) (car (cdr (car lst)))]
+     [else (lookup id (cdr lst))]))
+   ;(error 'lookup "Función no implementada"))
 
 ;; Función que compara la longitud de las listas lst1 y lst2. El valor de regreso son alguno de los 
 ;; siguientes:
