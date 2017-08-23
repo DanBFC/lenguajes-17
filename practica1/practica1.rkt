@@ -7,7 +7,6 @@
 ;; rps: number number -> number
 (define (rps a b)
    (+ (sqrt (expt a b)) (sqrt (expt b a))))
-   ;;(error 'rps "Función no implementada"))
 
 ;; Función que encuentra el área de un tirángulo dados sus lados, usando la fórmula de Herón. Se usa
 ;; la primitiva let para evitar cálculos repetitivos.
@@ -15,7 +14,6 @@
 (define (area-heron a b c)
    (let ([s (/ (+ a b c) 2)])
      (sqrt (* s (- s a) (- s b) (- s c)))))
-   ;(error 'area-heron "Función no implementada"))
 
 ;; Predicado que determina si la pareja a b entará en el antro usando condicionales. La respuesta de 
 ;; el predicado está dada de acuerdo a lo siguiente:
@@ -28,7 +26,6 @@
      [(or (<= a 2) (<= b 2)) 'no]
      [(or (>= a 8) (>= b 8)) 'si]
      [else 'quiza]))
-   ;(error 'entra? "Función no implementada"))
 
 ;; Función recursiva que regresa el número de apariciones del dígito m como digito en el número 
 ;; entero positivo n.
@@ -38,7 +35,6 @@
      [(zero? n) 0]
      [else (+ (if(= (modulo n 10) m) 1 0)
               (apariciones (truncate (/ n 10)) m))]))
-   ;(error 'apariciones "Función no implementada"))
 
 ;; Función recursiva que calcula el número de pares de una cadena. Decimos que un par en una cadena
 ;; son dos caracteres idénticos, separados por un tercero. Por ejemplo "AxA" es el par de "A". Los
@@ -49,9 +45,6 @@
      [(< (string-length c) 3) 0]
      [else (+ (if (equal? (string-ref c 0) (string-ref c 2)) 1 0)
               (cuenta-pares (substring c 1)))]))
-   ;(error 'cuenta-pares "Función no implementada"))
-
-
 
 ;; Función auxiliar que imprime una pirámide en pantalla recursivamente.
 ;; print-piramide number number -> void
@@ -74,7 +67,6 @@
    (cond
      [(equal? lst1 '()) empty]
      [else (cons (list (car lst1) (car lst2)) (arma-pares (cdr lst1) (cdr lst2)))]))
-   ;(error 'arma-pares "Función no implementada"))
 
 ;; Función que recibe una lista con elementos de la forma '(id value) y regresa el valor asociado al
 ;; id que fue pasado como parámetro.
@@ -83,7 +75,6 @@
    (cond
      [(equal? (car (car lst)) id) (car (cdr (car lst)))]
      [else (lookup id (cdr lst))]))
-   ;(error 'lookup "Función no implementada"))
 
 ;; Función que compara la longitud de las listas lst1 y lst2. El valor de regreso son alguno de los 
 ;; siguientes:
@@ -101,7 +92,6 @@
    (cond
      [(= n 0) nombre]
      [else (list (entierra nombre (- n 1)))]))
-   ;(error 'entierra "Función no implementada"))
 
 ;; Función que que mezcla dos listas ordenadas obtieniendo una nueva, ordenada de manera ascendente.
 ;; mezcla: list list -> list
