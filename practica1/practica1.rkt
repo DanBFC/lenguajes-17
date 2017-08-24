@@ -83,7 +83,11 @@
 ;; · 'listas-iguales
 ;; compara-longitud: list list -> symbol
 (define (compara-longitud lst1 lst2)
-   (cond))
+   (if (= (length lst1) (length lst2))
+       'listas-iguales
+       (if (< (length lst1) (length lst2))
+           'lista2-mas-grande
+           'lista1-mas-grande)))
 
 ;; Función que entierra el símbolo nombre, n número de veces. Es decir, se anidan n - 1 listas hasta
 ;; que se llega a la lista que tiene al símbolo nombre.
@@ -96,7 +100,13 @@
 ;; Función que que mezcla dos listas ordenadas obtieniendo una nueva, ordenada de manera ascendente.
 ;; mezcla: list list -> list
 (define (mezcla lst1 lst2)
-   (error 'mezcla "Función no implementada"))
+   (cond
+     [(empty? lst1) lst2]
+     [(empty? lst2) lst1]
+     (else (let* ([a (car lst1)] [b (car lst2)])
+           (if (< a b)
+               (cons (a cons (b (mezcla (cdr lst1) (cdr lst2)))))
+               (cons (b cons (a (mezcla (cdr lst1) (cdr lst2))))))))))
 
 ;; Función que recibe una lista de números y regresa una nueva lista de cadenas que representan al
 ;; número binario asociado a estos números.
