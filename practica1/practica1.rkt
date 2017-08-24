@@ -83,7 +83,7 @@
 ;; · 'listas-iguales
 ;; compara-longitud: list list -> symbol
 (define (compara-longitud lst1 lst2)
-   (error 'compara-longitud "Función no implementada"))
+   (cond))
 
 ;; Función que entierra el símbolo nombre, n número de veces. Es decir, se anidan n - 1 listas hasta
 ;; que se llega a la lista que tiene al símbolo nombre.
@@ -102,7 +102,12 @@
 ;; número binario asociado a estos números.
 ;; binarios: (listof number) -> (listof string)
 (define (binarios lst)
-   (error 'binarios "Función no implementada"))
+	(map bin lst))
+   
+
+;; auxiliar, convierte a binario un numero en decimal
+(define (bin n)
+   (if (zero? n) 0 (+ (* 10 (bin (quotient n 2))) (remainder n 2))))
 
 ;; Función que recibe una lista y regresa una nueva conteniendo únicamente aquellos que son 
 ;; triangulares.
