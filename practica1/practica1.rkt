@@ -113,7 +113,12 @@
 ;; triangulares.
 ;; triangulares: (listof number) -> (listof number)
 (define (triangulares lst)
-   (error 'triangulares "Función no implementada"))
+   (cond
+   [(empty? lst) '()]
+   [(list? lst) (if (mul3 (car lst)) (cons (car lst) (triangulares (cdr lst))) ((triangulares (cdr lst))))]))
+
+(define (mul3 n)
+        (if (= (modulo n 3) 0) #t #f))
 
 ;; Función que, usando foldr, intercala un símbolo dado entre los elementos de una lista.
 ;; intercalar: list symbol -> list
@@ -124,3 +129,6 @@
 ;; intercalal: list symbol -> list
 (define (intercalal lst s)
    (error 'intercalal "Función no implementada"))
+
+
+(triangulares '(1 2 3 4 5 6))
