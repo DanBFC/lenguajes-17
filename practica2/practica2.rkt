@@ -31,7 +31,7 @@
 (define (evalua f v)
    (type-case funcion f
      [x () (cte v)]
-     [cte (n) (cte v)]
+     [cte (n) (cte n)]
      [sum (f g) (sum (evalua f v) (evalua g v))]
      [mul (f g) (mul (evalua f v) (evalua g v))]
      [div (f g) (div (evalua f v) (evalua g v))]
@@ -46,7 +46,7 @@
      [sum (f g) (sum (deriva f) (deriva g))]
      [mul (f g) (sum (mul f (deriva g)) (mul g (deriva f)))]
      [div (f g) (div (sum (mul (deriva f) g) (mul f (deriva g))) (pot g 2))]
-     [pot (f n) (sum (mul (cte (- n 1)) (pot f (- n 1))) (deriva f))]))
+     [pot (f n) (mul (mul (cte n) (pot f (- n 1))) (deriva f))]))
 
 ; ------------------------------------------------------------------------------------------------ ;
 
