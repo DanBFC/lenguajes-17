@@ -73,16 +73,32 @@
 
 ; ------------------------------------------------------------------------------------------------ ;
 
+(define (any tipo) #t)
 ;; TDA para representar una gramática de arreglos.
 ;; Se tienen constructores que permiten definir un arreglo, para especificar la operación de agregar 
 ;; un elemento y un tercero para obtener elemento.
+
 (define-type arreglo
-   [tipo-arreglo-no-implementado])
+  [arrg (tipo flat-contract?) (dim number?) (elems list?)]
+  [agrega-a (e flat-contract?) (a arreglo?) (i number?)]
+  [obten-a (a arreglo?) (i number?)])
+
+;;funcion auxiliar, regresa el i-esimo elemento de un arreglo
+;; obt: arreglo -> number -> element
+(define (obt ar n)
+  (if (eq? ar '()) (error "dimension invalida")
+   (if (zero? n) (car ar) ((obt (cdr ar) (- n 1) )) )
+   )
+  )
 
 ;; Función que evalúa expresiones de tipo arreglo.
 ;; calc-a: arreglo -> arreglo
 (define (calc-a arr)
-   (error 'calc-a "Función no implementada"))
+  (cond
+    [(arrg? arr) (arrg-elems arr)]
+    ;;[(agrega-a? arr) (add (agrega-a-a arr) (agrega-a-e arr) (agrega-a-i arr)))]
+    [(obten-a? arr) (obt (arrg-elems (obten-a-a arr)) (obten-a-i arr))]
+    ))
 
 ; ------------------------------------------------------------------------------------------------ ;
 
@@ -117,3 +133,4 @@
      [union (a b) (cjto (remove-duplicates (append (cjto-l a) (cjto-l b))))]
      [interseccion (a b) '()]
      [diferencia (a b) '()]))
+
