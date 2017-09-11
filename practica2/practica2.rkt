@@ -54,13 +54,17 @@
 ;; Se tiene un único constructor para representar autómatas finitos deterministas como la quintúpla
 ;; correspondiente.
 (define-type automata
-   [tipo-automata-no-implementado])
+  [estados (l list?)]
+  [alfabeto (l list?)]
+  [inicial (a symbol?)]
+  [transicion (f procedure?)]
+  [finales (l list?)])
 
 ;; Función que verifica que un afd está bien construido. Verifica que el símbolo inicial y el conjunto
 ;; de símbolos finales pertenecen al conjunto de estados.
 ;; verifica: automata -> boolean
 (define (verifica atm)
-   (error 'verifica "Función no implementada"))
+   (if (and (member inicial estados) (member finales estados)) #t #f))
 
 ;; Predicado que dado un afd y una lista de símbolos que representan una expresión, deterimina si es
 ;; aceptada por el autómata.
