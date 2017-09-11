@@ -45,7 +45,7 @@
      [x () (cte 1)]
      [sum (f g) (sum (deriva f) (deriva g))]
      [mul (f g) (sum (mul f (deriva g)) (mul g (deriva f)))]
-     [div (f g) (div (sum (mul (deriva f) g) (mul f (deriva g))) (pot g 2))]
+     [div (f g) (div (sum (mul (deriva f) g) (mul (mul f (deriva g)) (cte -1))) (pot g 2))]
      [pot (f n) (mul (mul (cte n) (pot f (- n 1))) (deriva f))]))
 
 ; ------------------------------------------------------------------------------------------------ ;
@@ -87,9 +87,29 @@
 ;; determinar si un elemento está contenido en el conjunto, agregar un elemento, unir conjunto, 
 ;; intersectar conjunto y calcular la diferencia.
 (define-type conjunto
-   [tipo-conjunto-no-implementado])
+   [cjto (l list?)]
+   [esvacio? (c conjunto?)]
+   [contiene? (c conjunto?) (e number?)]
+   [agrega-c (c conjunto?) (e number?)]
+   [union (c1 conjunto?) (c2 conjunto?)]
+   [interseccion (c1 conjunto?) (c2 conjunto?)]
+   [diferencia (c1 conjunto?) (c2 conjunto?)])
+
+;;función aux
+(define (elemento e l)
+   (cond
+     [(empty? l) #f]
+     [(list? l) (if (= e (car l)) #t (elemento e (cdr l)))]))
+  
 
 ;; Función que evalúa expresiones de tipo conjunto.
 ;; calc-c: conjunto -> conjunto
 (define (calc-c cto)
-   (error 'calc-c "Función no implementada"))
+   (type-case conjunto cto
+     [cjto (l) (cjto l)]
+     [esvacio? (c) (empty? (cjto-l c))]
+     [contiene? (c e) (elemento e (cjto-l c))]
+     [agrega-c (c e) (cjto (remove-duplicates (cons e (cjto-l c))))]
+     [union (a b) (cjto (remove-duplicates (append (cjto-l a) (cjto-l b))))]
+     [interseccion (a b) '()]
+     [diferencia (a b) '()]))

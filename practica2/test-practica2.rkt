@@ -45,4 +45,8 @@
 #| ... Aquí van las pruebas (Borrar este comentario) ... |#
 
 ;; Pruebas para calc-c
-#| ... Aquí van las pruebas (Borrar este comentario) ... |#
+(test (calc-c (cjto '(1 2 3))) (cjto '(1 2 3)))
+(test (calc-c (esvacio? (cjto '()))) #t)
+(test (calc-c (contiene? (cjto '(1 2 3)) 1)) #t)
+(test (calc-c (agrega-c (cjto '(2 3)) 1)) (cjto '(1 2 3)))
+(test (calc-c (union (cjto '(1 2 3)) (cjto '(4 5 6)))) (cjto '(1 2 3 4 5 6)))
